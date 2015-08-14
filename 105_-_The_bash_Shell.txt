@@ -1,0 +1,164 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2015-08-14T13:19:44-07:00
+
+====== 105 - The bash Shell ======
+
+The command line, as much as it may seem to be a fundamental part of the operating system, is not provided by the Linux kernel itself. Rather, it is provided by a program called a shell. The first shell was sh, the Bourne Shell, and most modern systems include this as a fallback. Most distributions, however, use bash, the Bourne-again Shell, as the default. Bash provides some fairly advanced features. In this tutorial, I'll teach you to combine commands to automate complex tasks.
+
+First, we need to learn about the fundamental tool of bash command combination: the pipe. Pipes are, conceptually, like real pipes: things that go in one end of a pipe come out the other end. Pipes are represented by "|", the pipe character (it's Shift+\, the key above Enter and below Backspace). For example, the command grep allows you to search text for a specific string. We can pipe the output of some other command into it to see only the lines that contain the text we want. For example:
+
+	ls -lh | grep Docu
+	
+will return:
+
+	drwxr-xr-x  3 sws sws 4.0K Aug  4 09:26 Documents
+	
+This allows us to cut out all the information we don't care about, which in a crowded directory is very useful. You can also do:
+
+	ls -lh | grep D
+
+which will look for any line with a capital D, displaying:
+
+	drwxr-xr-x  2 sws sws 4.0K Aug  3 23:37 Desktop
+	drwxr-xr-x  3 sws sws 4.0K Aug  4 09:26 Documents
+	drwxr-xr-x  2 sws sws 4.0K Aug  4 09:11 Downloads
+
+grep can be run on any text stream, and you will find that it is one of the most useful tools that UNIX-like operating systems provide.
+
+Another useful tool is the command tail, which allows you to read a file that is being written to, such as a log file (or just read the last few lines of a file). Try:
+
+	tail /var/log/syslog
+
+and 
+
+	tail -f /var/og/syslog
+	
+You will see ten lines of text, filled with various information about your system's activities, something like:
+
+	Aug  8 12:52:52 shadowfax2 kernel: [ 6613.010144] iwlwifi 0000:02:00.0: Not sending command - RF KILL
+
+You will notice, however, that the first will exit and the second will not. This is because -f, for follow, tells tail to continue printing new lines as they are added. If you have wifi, try connecting and disconnecting; you'll get a lot of info about the state of the wifi, as the file updates.
+
+Now, let's combine the two. Try:
+
+	tail /var/log/syslog | grep kernel:
+	
+and turn your WiFi on and off (or disconnect and reconnect your Ethernet cable). You'll see far fewer messages, and they'll all be messages from the kernel about the interfaces. This is very useful for diagnosing system problems and ensuring that everything is behaving as it should - since all syslog messages are tagged, it is simple to filter them by application. There are similar use cases for almost every program's log files.
+
+Another very useful command is cut. cut allows you to select only the parts of each line that you want. cut has many options, but in this case we'll use only -d, which tells cut how to split up the lines, and -f, which tells it which fields to display. For example, 
+
+	tail /var/log/syslog | cut -d " " -f 6
+	
+tells cut to split on the space character (as denoted by " ", a space contained within quotes), and to show the sixth field. This is best explained visually. After being told to split on space, cut might end up with the following fields:
+
+01. Aug  
+02.
+03. 8 
+4. 12:52:52 
+5. shadowfax2 
+6. kernel: 
+7. [ 
+8. 6613.010144] 
+9. iwlwifi 
+10. 0000:02:00.0: 
+11. Not 
+12. sending 
+13. command
+14. - 
+15. RF 
+16. KILL
+	
+It will select only the sixth field because of -f 6, and so its output would be 
+
+	kernel:
+	
+Now, more usefully, we might simply remove all the date, time, and name info by using -f 6- instead. Adding the - after the 6 tells cut to display the 6th field and every subsequent one, giving us an output like:
+
+	kernel: [ 6613.010144] iwlwifi 0000:02:00.0: Not sending command - RF KILL
+	
+So, the command
+
+	tail /var/log/syslog | cut -d " " -f 6-
+	
+might give us:
+
+	NetworkManager[799]: <warn> could not get interface properties: No readable properties in this interface.
+	NetworkManager[799]: <info> (wlan0): supplicant interface state: starting -> ready
+	NetworkManager[799]: <info> (wlan0): device state change: unavailable -> disconnected (reason ...
+	NetworkManager[799]: <warn> could not get interface properties: No readable properties in this interface.
+	wpa_supplicant[1807]: rfkill: WLAN hard blocked
+	NetworkManager[799]: <info> WiFi now disabled by radio killswitch
+	NetworkManager[799]: <info> (wlan0): device state change: disconnected -> unavailable (reason 'none') [30 20 0]
+	NetworkManager[799]: <info> (wlan0): deactivating device (reason 'none') [0]
+	kernel: [ 6613.009952] iwlwifi 0000:02:00.0: RF_KILL bit toggled to disable radio.
+	kernel: [ 6613.010144] iwlwifi 0000:02:00.0: Not sending command - RF KILL
+ 
+ A much more comprehensible and compact output. Now, let's say we care only about output from NetworkManager. We could say:
+ 
+	tail /var/log/syslog | cut -d " " -f 6- | grep NetworkManager
+	
+and see a snapshot of the activites of the network manager, minus all the cruft added for log analysis. For example:
+
+	NetworkManager[799]: <warn> could not get interface properties: No readable properties in this interface.
+	NetworkManager[799]: <info> (wlan0): supplicant interface state: starting -> ready
+	NetworkManager[799]: <info> (wlan0): device state change: unavailable -> disconnected (reason ...
+	NetworkManager[799]: <warn> could not get interface properties: No readable properties in this interface.
+	NetworkManager[799]: <info> WiFi now disabled by radio killswitch
+	NetworkManager[799]: <info> (wlan0): device state change: disconnected -> unavailable (reason 'none') [30 20 0]
+	NetworkManager[799]: <info> (wlan0): deactivating device (reason 'none') [0]
+
+As you can see, combining multiple text commands allows us to select only the information we want to see, and to display it however we like.
+
+Similarly, we can send the output of a command to a file. If we run:
+
+	tail /var/log/syslog > syslog.txt
+
+and then
+
+	cat syslog.txt
+
+we will see that it contains the output of that tail command. The > symbol overwrites the file indicated, while >> appends to it. So,
+
+	echo Test > file.txt
+	echo tseT > file.txt
+	
+results in file.txt containing tseT, while
+
+	echo Test > file.txt
+	echo tseT >> file.txt
+	
+results in file.txt containing
+	
+	Test
+	tseT
+	
+This is useful for unattended operations which might need to be reviewed later. For keeping logs, the tee command can be helpful. 
+
+	command | tee file.txt
+	
+will show you the output of command while also copying it to file.txt.
+
+The bash shell supports variables, too. Variables are always in the form of $NAME. Some are set beforehand by the system; for example, type:
+
+	echo $PATH
+
+and you will see a long string of directories (this is the list of all places that the system looks for executables when you type a command). You can set variables like this:
+
+	TESTVAR=test
+
+There cannot be spaces before the equals sign. Now, bash will interpret $TESTVAR as if it were the string "test". Try it:
+
+	echo $TESTVAR
+	
+The point of all this will become clear to you when you start writing bash scripts; for now, know that such variables are used to control some aspects of the operation of the system. For example, the variable PS1 defines what your shell prompt looks like. Try
+
+	PS1="Command me, master: "
+
+or my personal PS1:
+
+	PS1="\n\t: \[$(tput sgr0)\]\[\033[38;5;2m\]\u\[$(tput sgr0)\]\[\033[38;5;15m\] [\w]\n\\$ \[$(tput sgr0)\]"
+	
+To bring your shell back to normal, simply close and reopen it.
+	
+These tricks will allow you to use the bash shell to its fullest. In the next tutorial, we'll being looking at one of the most useful things to do from the command line: network setup and troubleshooting.

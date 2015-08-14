@@ -1,0 +1,37 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2015-08-14T13:20:13-07:00
+
+====== 108 - FIFOs and Advanced Piping ======
+
+While we have already explored pipes created on the command line (using |), there are many other uses for pipes, which are also known as FIFOs. Some of these uses require pipes in two, three, and even four directions, and therefore the | character will not suffice. To assist users in these operations, UNIX-like systems provide the mkfifo command ("make first-in-first-out"). For example:
+
+	mkfifo name.fifo
+	
+will create a file name.fifo in the current directory. Monitor name.fifo with:
+
+	tail -f name.fifo
+	
+and, in a second terminal emulator,
+
+	echo "Test" > name.fifo
+	
+The string "Test" will enter name.fifo and be redirected as appropriate - in this case to tail. Further strings will also be accepted. You can also:
+
+	cat name.fifo
+	
+which will accept only a single string from the FIFO, and then exit - useful for scripts. Don't forget to 
+
+	rm name.fifo
+	
+(which works just like on a regular file). Or, you can create it in /tmp/, where the operating system will remove it when you reboot.
+
+One helpful use of FIFOs is to connect nc servers and clients, to create TCP proxies with NetCat. Ex:
+
+	$ mkfifo /tmp/proxy.fifo
+	$ nc -l 101 < /tmp/proxy.fifo | nc remotehost.example.com 100 > /tmp/proxy.fifo
+	
+This will forward traffic from clients connected to port 101 to remotehost.example.com:100, and vice versa; the output of the first nc is connected to the input of the second, and the output of the second nc is connected through /tmp/proxy.fifo to the input of the first.
+
+This tutorial may be expanded at a later time - for now, though, this should be enough information to allow you to use FIFOs and pipes to their fullest extent.
+

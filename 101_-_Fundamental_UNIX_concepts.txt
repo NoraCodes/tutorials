@@ -1,0 +1,25 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2015-08-14T13:18:50-07:00
+
+====== 101 - Fundamental UNIX concepts ======
+
+First, I would like to welcome you to this tutorial series. Whatever the reason, you have decided to learn how to use a computer the way they were meant to be used - not for network connectivity and Facebook browsing only, but as devices that can greatly enhance your capabilities to remember, to experiance, to process, and even to think. For this, there is no software better suited than free software on top of the Linux kernel. Before we dive into the world of GNU/Linux, however, we need to go over some fundamental UNIX concepts. It won't take long, I promise.
+
+1. One Tool for the Job
+
+This is one of the fundamental aspects of the command line and of UNIX-like operating systems in general. In essence, it means that it is preferable to create 5 tools that each solve a tiny part of your problem than to write one program that does the whole thing. For example, consider a car that has broken down - let's say it has lost a fan belt. Typical programmers for certain other operating systems (which shall remain nameless) will tend to create a huge suite of tools, all highly integrated, which will fix that car very quickly. It will open the hood, measure the belt, get a new belt, install it, tighten it, and close the hood again. But when you need to change a tire, it will be absolutely useless.
+
+The UNIX way, however, is to carry a toolbox. The toolbox has twenty wrenches, ten screw drivers, a tape measure, a soldering iron, a wire cutter, a fuse puller, et cetera. This one toolbox, of a similar size and cost to the advanced belt-replacing tool, can be used to fix almost anything at all.
+
+This does not mean that some tools should not be capable of doing many things, but it does mean that tools should not do so unnecessarily. For example, the ping tool can measure a network's connectivity in many different ways, but it only measures the network. It is not a chat client or a file manager.
+
+2. Text Strings are a Universal Interface
+
+This rule is one of the major reasons that the previous one works. If all tools emit and accept text, all tools can be attached to all other tools, allowing a savvy command line user to create chains of tools that end up accomplishing very, very complex tasks in a clear, repeatable, and automated way.
+
+3. Everything is a File
+
+In UNIX-like systems, everything with which you can communicate is a file. Obviously, files are files - you can write data to them and read data from them, and it get written to and read from the disk. But many other things are also files. For example, the operating system provides a "file" called /dev/urandom which cannot be written to but, when read from, will spit out truly random bits. It does not "contain" these bits in the way a normal file on the disk does - every time you read from it, they are different - but for a programmer or command line user, there is no difference between /dev/urandom and, for example, this file, your cat photos, or your tax spreadsheet.
+
+Ok, the boring part is over. Move on to lesson 102 to learn how to use the command line to get some work done!

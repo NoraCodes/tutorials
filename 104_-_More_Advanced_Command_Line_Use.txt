@@ -1,0 +1,77 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2015-08-14T13:19:31-07:00
+
+====== 104 - More Advanced Command Line Use ======
+
+By now, it should be clear to you that there a very large number of commands are available on the command line. While I will do my best to teach you the basics, it would be both impossisble and impractical for me to teach you all of them. Therefore, on the "teach someone to fish" theory, I will instruct you in the use of man, the Linux manual viewer. man is very simple to use. Try, for example,
+
+	man intro
+	
+This will show a page about the basics of the operating system (you don't need to read it, but it is very interesting). You can use the up and down arrows to scroll (or the mouse scroll wheel, or the space bar). You can use man in a few ways, but it generally works best as:
+
+	man command
+	
+where command is the name of the page, generally the same as the command you want to know about. The manual pages are set up in several sections: 
+
+	   1   Executable programs or shell commands
+	   2   System calls (functions provided by the kernel)
+	   3   Library calls (functions within program libraries)
+	   4   Special files (usually found in /dev)
+	   5   File formats and conventions eg /etc/passwd
+	   6   Games
+	   7   Miscellaneous (including macro packages and conventions), e.g. man(7), groff(7)
+	   8   System administration commands (usually only for root)
+	   9   Kernel routines [Non standard]
+
+If you see something such as man(7) or groff(7), and wish to look it up, you'll need to identify the section as well as the page. You can do this by entering:
+
+	man section command
+	
+So, for groff(7), you would enter:
+
+	man 7 groff
+	
+If you need to know something about a general topic, but don't know exactly which page you need to look up, you can use the command apropos. For example:
+
+	apropos users
+	
+will list all the man pages with the keyword "users" in thier description.
+
+As we've already seen, the cat command allows you to read a file. Its output isn't very pretty, however - it simply spits the contents of the file onto the screen. The command less allows you to read a file with controls similar to those used to read man pages. You can simply type:
+
+	less file.txt
+	
+and use space, scroll wheel, or arrow keys to read a file one page at a time. 
+
+The command line can also be used to install and remove software. The software for this is called APT - the Advanced Package Tool.
+
+NOTE: Other distributions use other package managers. If you would like me to expand this tutorial to include your distro's package manager, please email me. Also note that Nix will be covered in a seperate tutorial.
+
+NOTE: There is a distinction between APT, the Advanced Package Tool library and toolset, and apt, the APT command line interface. 
+
+APT used a repository-distribution system. Repositories store compiled software contained in packages, which you can download safely and with confidence that they have not been modified to contain malware. APT also builds a dependency tree, meaning that when you install a specific package, APT will automatically figure out all the libraries and other software it needs to run and install those as well. 
+
+Your system holds a list of which packages are available, which you've chosen to install, and which are installed only because they're required by other packages. To bring this list into sync with the remote repositories (which you should always do to make sure you have the latest versions of software), use the command:
+
+	sudo apt update
+	
+apt will spit out a list of repositories it has "hit" (gotten information from). Now, your system package list is up to date; let's install something. We'll install SciTE, a small but very useful text editor. Type:
+
+	sudo apt install scite
+	
+apt will download and install SciTE. That's it - no EXE or MSI files to run, no zip files to unzip, no .tar.gz source tarballs to compile. If you run the command scite, the editor will launch. Now, let's remove it, just to show how that works:
+
+	sudo apt remove scite
+
+apt will delete all of SciTE's files, erasing it from your system and freeing up disk space. APT also stores the versions of your packages, so it can update your system with:
+
+	sudo apt upgrade
+
+Depending on how up to date your system is, this might run for a while. Once it's done, your system will be up to date.
+
+NOTE: Some tutorials use apt-get instead of apt. This is fine, but apt-get is intentionally outdated, since it is designed to be compatible with very old software. apt is much more user-friendly.
+
+NOTE: In graphical systems like Ubuntu Desktop, there is generally an Update Manager that will update your system from the GUI. It uses apt on the back-end, essentially running these same commands and showing you a pretty interface.
+
+Now, you can install and learn how to use software yourself. Let's move on to some more advanced topics, such as combining commands to unlock the true power of UNIX automation.

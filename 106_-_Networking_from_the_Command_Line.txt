@@ -1,0 +1,119 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2015-08-14T13:20:04-07:00
+
+====== 106 - Networking from the Command Line ======
+
+The command line is very useful for network diagnostics, and the network is very useful for facilitating various command line utilities. This tutorial won't cover lynx2, irssi, ftp, ssh, or other such utilities - they change often, and in my opinion, they each deserve their own, full tutorial. I may cover them each at a later time - if you want to see a specific one covered, email me.
+
+NOTE: This tutorial assumes you understand basic TCP/IP networking. If not, feel free to skip this tutorial - you probably don't need it, and won't be interested. You can always come back later!
+
+The most basic test of connectivity is the ICMP ECHO message - it's like asking a remote host, "Are you there?" The UNIX standard command for this is ping (or ping6 for IPv6). ping's syntax is simple:
+
+	ping example.com
+	
+ping sends ICMP ECHO messages and reports the size, host, ICMP sequence, time to live, and round trip time for each returned ICMP message. When ended with Ctrl+C, it also reports various totals, round trip time stats, and packet loss. This is useful for characterizing networks, but sometimes we only want to test whether a host is up, we can use the -c option which causes ping to send only a certain number of packets. In addition, we can use -i to change the interval between packets. For example:
+
+	ping -c 5 -i 0.2 localhost
+	
+will cause ping to behave like the Windows ping and send only 5 packets, at 0.2 second intervals.
+
+If you need to get the IP address of a host, or to figure out where in the DNS tree the address is being resolved, you can use nslookup. For example:
+
+[FINISH THIS]
+
+Another useful, jack-of-all-trades network tool is NetCat, or nc. It is, as the name implies, essentially just cat over the network. To see how it works, open up 2 terminal windows. In one, enter:
+
+	nc -l 1234
+	
+the -l stands for "listen". This command has started a nc server on port 1234. If we then use, in the other window,
+
+	echo "Testing NetCat!" | nc localhost 1234
+	
+The server terminal will print out 
+
+	Testing NetCat!
+	
+Clearly, sending data like this is not particularly useful, but NetCat can be used to manually (or programatically) talk to HTTP servers:
+
+	
+	$ printf "GET / HTTP/1.0\r\n\r\n" | nc example.com 80
+	HTTP/1.0 200 OK
+	Server: SimpleHTTP/0.6 Python/2.7.9
+	Date: Sun, 09 Aug 2015 10:58:39 GMT
+	Content-type: text/html; charset=UTF-8
+	Content-Length: 3136
+	...
+	
+If you have multiple interfaces, you may find the -s (source IP address) option useful. For example, assuming 192.168.1.5 on eth0 and 10.0.0.5 on eth1, you can force the use of eth1:
+
+	nc -s 10.0.0.5 example.com 80 
+	
+You can customize NetCat's use even further with -V (set routing table), -t (send DON'T and WON'T), and many other options. I suggess you read the manual page if you are a network administrator or hacker - NetCat will become an invaluable tool.
+
+Another useful trick exists when using bash (usually the default shell). You can:
+
+	printf "GET / HTTP/1.0\r\n\r\n" > /dev/tcp/example.com/80
+	
+and bash will open a TCP session to example.com:80 and send the request. However, /dev/tcp/hostname/port is not a real file, or a real kernel device; it is simply a convenient shorthand that bash allows us to use when redirecting input.
+
+[WRITE ABOUT NMAP - JUST BASIC SCANNING]
+
+For lower-level settings, the ip comand is extremely useful. ip is a suite of tools to examine the state, configuration, and capabilities of network interfaces. For example,
+
+	ip address
+	
+will report the addresses of all interfaces, while
+
+	ip -4 address
+	
+will report on only those with IPv4 connectivity, like:
+
+	$ ip -4 address
+	1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default 
+		inet 127.0.0.1/8 scope host lo
+			valid_lft forever preferred_lft forever
+
+and
+
+	ip -6 address
+	
+will report only on those with IPv6 connectivity. (These are actually abbreviations for -family inet and -family inet6 respectively). With IP, you can also -r to resolve addresses, such as:
+			
+	$ ip -4 -r address
+	1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default 
+		inet localhost/8 scope host lo
+			valid_lft forever preferred_lft forever
+
+ip also supports so-called "scriptable" output, in which each record is printed on a single line, making it more grep friendly. This is set with the -o option.
+
+ip will inform you about the routing table (ip route), network links (ip link), ARP table entries (ip neighbour), and many other things. For most users, ip address, ip route, and ip link will be sufficient to satisfy most needs - more advanced users should read the manual page for ip - it supports many advanced network configuration settings.
+
+One of the other major uses of the ip command is to set device properties. The most basic of these is interface upping/downing (replacing ifconfig and ifup/ifdown). For example,
+
+	sudo ip link set eth0 up
+	
+will turn on the network device named eth0. Similarly, 
+
+	sudo ip link set eth0 down
+	
+will turn it off. 
+
+NOTE: You can see which devices are available with ip link. eth0, eth1, etc. are (usually) Ethernet adapters, wlan0, wlan1, etc. are (usually) 802.11 WiFi interfaces, and lo0, lo1, etc. are loopback devices. Other types of devices exist, but they will be covered in tutorials on their specific technologies. 
+
+You can also turn ARP, multicast, and dynamism on and off with
+
+	sudo ip link set eth0 arp on
+	sudo ip link set eth0 multicast on
+	sudo ip link set eth0 dynamic on
+
+respectively. ip also supports changing addresses, mtu, etc. with the respective command of the form
+
+	sudo ip link set eth0 address 192.168.1.7
+	
+(for example -- replace "address" with the attribute you'd like to change, and 192.168.1.7 with a relevant attribute). Again, see the manual page, or try
+
+	ip link help
+	
+which will list all of the available options.
+

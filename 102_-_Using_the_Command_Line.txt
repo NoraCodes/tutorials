@@ -1,0 +1,165 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2015-08-14T13:19:04-07:00
+
+====== 102 - Using the Command Line ======
+
+NOTE: This guide assumes that you are using a relatively recent version of Ubuntu Linux - 15.04 is recommended, though later versions are probably alright. 14.04 will work for much of the tutorial, but certain discussions in re: the init system will be inaccurate.
+
+The command line is powerful - it is capable of interacting with every part of the computer. It can create files, rename them, and delete them; connect and disconnect from networks; edit text; compile and execute programs; manipulate any data; play sounds; and do anything else a computer is capable of doing. By the same token, it is dangerous: with 9 keystrokes, you can blow away an entire computer's file system - and no, you don't get to know this command yet ;)
+
+To use the command line, you need something called a *terminal emulator*. This name comes from the fact that computers used to be huge, room-sized affairs, with users interacting through a terminal station or simply terminal (such as the VT-220). Now, terminals are faked through software, allowing you to have more than one (millions, in fact) on one machine. Terminal emulators are fairly complex and difficult to create. Luckily, the thousands of programmers before you have done this work already. From the GUI, simply press Ctrl+Alt+T to open one (or search for Terminal or XTerm in your programs menu - it is probably under Utilities). 
+
+You will be presented with something like: 
+
+	user@machine:~$
+	
+This is the prompt. It is literally the machine prompting you for input - telling you that it's your turn to talk. In addition, it contains a lot of information, so let's dissect it. In the example, user is the name of the user and machine is the name of the computer - the @ symbol signifies this, as in "user at machine". For my personal machine, this prompt looks like:
+
+	sws@shadowfax:~$
+	
+since my username is sws (as I don't like typing silverwingedseraph every time I log in) and my laptop is called shadowfax (all my machines are named after Lord of the Rings characters, locations, or events). There is another piece of information here too: the tilde. This signifies that you are currently in your home directory. To demonstrate how this works, let's change directories. Type:
+
+	cd /etc/apt
+	
+and press enter. Your prompt will now read:
+
+	user@machine:/etc/apt$
+	
+This means that, rather than working in your home directory, you are now working in /etc/apt (another directory on your file system). We don't want to change anything there, though, so let's go back to home. Type 
+
+	cd ~
+	
+and press enter. Your prompt will change back to the way it was before. Now, we've been using ~ (tilde) to represent the home directory, but in reality, that's just a convenience - you spend a lot of time in your home directory, so typing it out every time is a huge pain. Let's see where we really are in the file system. Type:
+
+	pwd
+	
+and press enter. pwd, or "print working directory", will spit out the name of the directory we're in. In this case, it will show:
+
+	/home/user
+	
+where user is your user name. For example, for me, it showed:
+
+	/home/sws
+	
+Now that we've gotten oriented, let's talk about how we've been doing it. These things I've been telling you to enter are called commands. For example, cd is a command that means "change directory". It changes what directory you're in. The way you tell it which directory to choose is by passing an argument - just adding something to the end of the command. In our case, it was first /etc/apt and the ~ . These arguments tell the program that cd represents how to do its job.
+
+In the end, that's all the command line does - it takes your input, turns it into a list of programs to run and arguments to those programs, runs them, and sometimes gives you the output back. But enough of this - let's do something useful. We're going to create, move, edit, and delete a file.
+
+
+Creating a file can be done in many ways, but I'll first show you the easiest - touch. Type:
+
+	touch test.txt
+	
+and press enter. test.txt now exists in your current working directory (~, if you've been following along).
+
+OK, we've created a file, but how can we see it? Well, there's a command for that too. Type:
+
+	ls
+	
+and press enter. A list like this will show up:
+
+	Desktop    Downloads  Pictures  Templates  Videos
+	Documents  Music      Public    test.txt
+
+These are all the files and folders in the current directory. As you can see, some were created for you - such as Desktop, Documents, Music, etc., but the file we just created is there too. 
+
+ls can give you more details about these files, too; try:
+
+	ls -l -h
+	
+In this command, l and h are "switches". "-l" tells ls to use a "long" listing format, while "-h" tells ls to use a "human-readable" format for the sizes (i.e., 20.3M rather than 20284435).
+
+Now, lets edit test.txt. Type:
+
+	nano test.txt
+	
+and hit enter. You will be shown an editor in which you can type. Type anything ("This is a test file." works well) and press Ctrl-O to save and Ctrl-X to exit. Now, let's read the contents of the file in a more command-line-friendly way. Type 
+
+	cat test.txt
+	
+and press enter. Whatever you typed will be displayed. The whole session will look a bit like this:
+
+	test@shadowfax2:~$ touch test.txt
+	test@shadowfax2:~$ ls
+	Desktop    Downloads  Pictures  Templates  Videos
+	Documents  Music      Public    test.txt
+	test@shadowfax2:~$ nano test.txt
+	test@shadowfax2:~$ cat test.txt 
+	This is a test file.
+	test@shadowfax2:~$ 
+	
+Now, we'll make a new directory and move the file there. Type:
+
+	mkdir directory
+	
+and hit enter. Running ls again will show you that the new directory has been created. Change directory into it (remember how from before?) and I'll teach you another trick. Type:
+
+	cd ..
+	
+and hit enter, and you'll notice that you've moved from ~/directory back to ~. How come? Well, the symbol
+
+	..
+	
+represents the parent directory - whatever the directory above this one is. So, if you just keep typing cd .. you'll eventually get to the root directory, called / .
+
+Anyway, lets move that file. Change directory to ~ and type:
+
+	mv test.txt directory/test.txt
+	
+and press enter. Typing ls will reveal that the file is gone. Enter
+
+	ls directory
+	
+and ls will happily show you the contents of that directory without even having to change directory there. In this case, of course, that will be test.txt and nothing else. The command
+
+	cp source destination
+	
+will do the same thing, except that it does not delete the source file (thus "copy" instead of "move").
+
+A note on absolute paths: you can always use an absolute path (one starting from / rather than from the current directory) instead of a relative path (simply typing the filename or directory/filename or whatever). For example, the following commands are equivalent, assuming that the test.txt file is in /home/user and the working directory is /home/user :
+
+	mv test.txt directory/test.txt
+	
+	mv ~/test.txt directory/test.txt
+	
+	mv /home/user/test.txt directory
+
+	mv /home/user/test.txt /home/user/directory/test.txt
+	
+
+Now let's delete that file. cd back to your home directory and type
+
+	rm directory
+	
+and hit enter. The command will complain that:
+
+	rm: cannot remove 'directory/': Is a directory
+	
+Ok, fine. Let's use rmdir, the directory removal command:
+
+	rmdir directory
+	
+Nope, still not good:
+
+	rmdir: failed to remove 'directory/': Directory not empty
+
+This is a safeguard to prevent you from deleting huge swaths of files on accident. We'll empty the directory and try again, but I'm going to teach you another trick in the meantime. Type this next thing but don't hit enter yet:
+
+	rm dir
+	
+Now, hit tab. You'll notice that the command line now reads:
+
+	rm directory/
+	
+This is because the command line is smart enough to complete your typing in certain situations - for example, when specifying files. Add the letter t to this and press tab again, resulting in:
+
+	rm directory/test.txt
+	
+and hit enter. Now, if we try:
+
+	rmdir directory
+	
+it should work. 
+
+Now you understand the basics of the command line - manipulating files and directories. Next, I'll introduce you to permissions and the magical command sudo.

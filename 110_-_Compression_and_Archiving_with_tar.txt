@@ -1,0 +1,68 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2015-08-14T13:20:24-07:00
+
+====== 110 - Compression and Archiving with tar ======
+
+Scripts are incredibly useful for doing nearly anything with a computer. Like the script for a movie, a computer script contains a list of actions and lines to be done and said. Also like a movie script, a computer script does not lay out every movement of every muscle and every twitch of every eye - it works in broader strokes, telling the actors, "move here, move there, say this, pick up that". In fact, one of the most useful kinds of scripting languages is simply a long list of commands like the ones you have learned throughout this tutorial. For example:
+
+	echo "Pinging host..."
+	ping -i 0.2 -c 5 8.8.8.8 > /dev/null
+	echo "Done pinging host."
+	sleep 120
+	echo "Pinging host again..."
+	ping -i 0.2 -c 5 8.8.8.8 > /dev/null
+	echo "Done pinging host."
+	
+will produce the output:
+
+	Pinging host...
+	Done pinging host.
+	
+And, two minutes later:
+	
+	Pinging host again...
+	Done pinging host.
+	
+This is because the output of the ping command is being sent to /dev/null, a device which simply "eats" content sent to it - that information is destroyed.
+
+Unlike movie scripts, however, computer scripts are able to change their course. For example:
+ 
+	if file.txt exists:
+		remove file.txt
+	otherwise:
+		echo "No file.txt"
+	end
+	
+(This is pseudocode and will not execute.) In this example, if file.txt exists, the script will remove it; if it does not exist, the script will tell us so. Later in this tutorial series, you will learn to create this simple program as shell, Python3, and Lua5.2 scripts.
+
+Though there are literally hundreds of scripting languages, they generally have a few charictaristics in common. 
+
+First, they are by definition high-level. In other words, they do not deal directly with the hardware of the device on which they run, nor even with the operating system. They deal with an abstract "application programming interface", or API, created in another language for each system individually.
+
+Second, and as a consequence of the first, scripting languages are usually portable. This means that programs written in, for example, Python3, on a computer with a GNU/Linux operating system can be run on a computer with a Windows/NT operating system without any problems, so long as Python3 is installed on that computer. 
+
+Third, scripting languages are usually interpreted. This means that, in the previous example, the program might be executed thus if file.txt did not exist (actions of the interpreter are denoted in [brackets], program lines with >, and output with no embellishment).
+
+[Load libraries, program code, etc.]
+> if file.txt exists:
+["if" statement means we need to check for something and decide based on that]
+[Check "file.txt exists" by doing some OS-specific action]
+[It's not true, so skip to "otherwise"]
+> rm file.txt
+[That's not "otherwise"; keep looking]
+> otherwise:
+[That's what was being looked for; now execute the statements until "end" is reached]
+> echo "No file.txt"
+[That's not "end"; execute it.]
+[Write "No file.txt" to the screen by doing some OS-specific action]
+No file.txt
+>end
+[OK, the conditional is over.]
+[No more commands, so exit.]
+
+As you can see, the interpreter does a lot of work with strings of program code. This leads to the fourth characteristic of scripting languages: they are slow compared to compiled languages. Therefore they should not be used for compute-intensive operations, unless those operations have been described in a more efficient language and are only being organized by the script. This is how NumPy operates; all the calculation is written in C, but all the high-level logic can be done in Python3. 
+
+The reason this is desireable is, in fact, the fifth characteristic: Scripting languages do not need to be compiled, preprocessed, collapsed, compressed, or operated on in any way in order to work. One simply types in source code and tells the interpreter to execute it. This makes them excellent for rapid prototyping and quick deployment.
+
+We will be looking at bash scripts, Python3 scripts, and Lua scripts in this tutorial series. Each language has its unique properties and uses, and each will almost certainly be useful to any programmer, engineer, or system administrator.

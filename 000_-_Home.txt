@@ -1,0 +1,16 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2015-08-14T12:19:57-04:00
+
+====== 000 - Home ======
+
+===== Welcome =====
+Welcome to SilverWingedSeraph's GNU/Linux tutorial series. I am Leo Tindall, a.k.a. the SilverWingedSeraph, and I have written these tutorials partly to help in solidifying and increasing my own knowledge (indeed, much of the initial work on the 100 and 200 series was done with no access to the Internet, using only my knowledge and various manual pages) and for instructing others - such as, perhaps, yourself.
+
+This tutorial series, though begun as a set of text files, has been converted to a format better suited for the Internet using the excellent Zim Desktop Wiki software. As such, the entire series can be downloaded as .tar.gz files of ASCII text (see [[110 - Compression and Archiving with tar]] for instructions).
+
+===== What? =====
+This tutorial series is intended to take a reader from being a user of their computer to being the master of it. You are expected to understand how to use your computer from its graphical user interface, and to have a Ubuntu environment in which to work. From there, you will learn how to use the command line with bash, how to write bash, Lua, and Python scripts, how to write C programs, and most importantly, you will understand how the computer "thinks".
+
+===== How? =====
+This tutorial series should be consumed in series - start here, move to [[001 - Table of Contents]], and continue on from there. Each tutorial page builds on the previous ones and introduces a new topic, while integrating the tools and techniques learned in the previous pages.

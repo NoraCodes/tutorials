@@ -1,0 +1,49 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2015-08-14T13:19:14-07:00
+
+====== 103 - Users and the Command Line ======
+
+One of the most useful features of UNIX-like operating systems in general, and Linux in particular, is the seperation of permissions between users.  You can restrict who can write, read, and execute your files, giving public access for some and restricting others. The command for manupulating these permissions is called chmod for "change mode". For example:
+
+	chmod a+rw file.txt
+
+gives everyone (a) additional permissions (+) of reading and writing the file (rw). On the other hand:
+
+	chmod a-w file.txt
+	
+changes everyone's permissions (a) by removing (-) the write permission (w). You can grant permissions to the owner of the file (u), other users in the group that owns the file (g), other users not in that group (o), and everyone (a). The permissions you can grant are read (r), write (w), and execute (x). (Technically, there are others, but they are of limited utility.) You can also use chmod recursively with the -R option - that is, change permissions for a directory, all its files, and all the files of all the directories below it, and below them, etc. For example:
+
+	chmod -R a+x directory
+
+Exercise 1: Figure out the chmod command that would be used to recursively set both read and write permissions for all users in the group that owns a directory calledd directory.
+
+It's also possible to change the group that owns the file. Every user belongs to at least one group, usually with the same name as that user, and can belong to an indefinite number of groups. [TODO: Add how to view the user's group assignments.] For example:
+
+	chgrp group file.txt
+	
+would change the group ownership of file.txt to the group group.
+
+More directly, you can change the ownership of the file with chown. For example:
+
+	chown user file.txt
+	
+will make user the owner of file.txt.
+
+Exercise 2: Which commands would change the ownership of the file in /home/user/file.txt to be owned by user2 and give read and write permissions to everyone? (Assume you are logged in as user.)
+
+Just in case you get into a bind or need to do something that no user has permission to do, there exists a special account called the superuser, super, or simply root. root is the first user ever created, has its own special home directory (not /home/root but rather /root) and it should NEVER be used for anything except administration. Do not browse the web on the root account; do not play games on the root account; never do anything on the root account unless you absolutely have to. 
+
+There is a command which facilitates this seperation. It allows you to execute a single command as root (or any other user) if you have permission to do so. Let's try it:
+
+	sudo ls
+	
+You will be asked for your password (not the root password; yours). Type it; the characters will not show up on screen. This is a security measure. sudo allows you to do many things, both useful and destructive - for example, sudo rm -rf / will delete your entire file system!
+
+You can also change which users you are logged in as with the command su. For example, 
+
+	sudo su otheruser
+	
+will drop you to another command line at which you are logged in as otheruser.
+
+You can navigate the filesystem and change permissions, and your knowledge of the sudo command gives you the ability to administrate the system effectively. Now, go on to the next tutorial, in which you will learn how to get help on commands you don't know about, and learn the names and uses of some of the more common utility commands.

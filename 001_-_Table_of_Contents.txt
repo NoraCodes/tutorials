@@ -1,0 +1,54 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2015-08-14T13:15:09-07:00
+
+====== 001 - Table of Contents ======
+
+Last updated: Thu Aug 6 10:29:31 UTC 2015
+
+Table of Contents
+
+	cat /dev/urandom | grep "What light from yonder window breaks?"
+
+A note on this Table of Contents: 
+
+	This table orders and organizes chapters by a 3-digit number. There are gaps
+	in this numbering scheme - this is intentional, as I may decide to add additional
+	chapters at a later date, and would rather not invalidate the entire
+	numbering scheme if and when I do so.
+
+[[000 - Home]]
+[[001 - Table of Contents]]
+
+100: GNU/Linux Tutorial
+	[[101 - Fundamental UNIX concepts]] - 100%
+	[[102 - Using the Command Line]] (File creation and management) - 100%
+	[[103 - Users and the Command Line]] (Permissions and sudo) - 90%
+	[[104 - More Advanced Command Line Use]] (Getting assistance and 
+		examining the machine state) - 100% 
+	[[105 - The bash Shell]] (Pipes, redirects, and variables) - 100%
+	[[106 - Networking from the Command Line]] - 75%
+	107 - GNU/Linux File Organization - 0% 
+	[[108 - FIFOs and Advanced Piping]] - 100%
+	109 - The Art of .bashrc - 0%
+	110 - Compression and archiving with tar - 0%
+	111 - A note on backups  - 0%
+	115 - Filesystems (fstab, mount, and network)
+	120 - systemd for initialization and bootup
+	185 - Nix, NixOS, and declarative operations - 0%
+
+200: Scripting Languages
+	[[201 - Defining scripting languages]] - 100%
+	202 - Scripting with bash (and other shells) - 0%
+	212 - Python - installation and basics - 0%
+	213 - Python on the command line (python, pip, and why not to use python2.7) - 0%
+	221 - Lua - installation and uses - 0%
+	222 - Lua vs. Python - 0%
+	223 - Regular Expressions (and writing something useful) - 0%
+
+300: Compiled Languages
+	301 - Defining compiled languages - 0%
+	302 - ANSI C - 0%
+	303 - Using gcc, ld, and make - 0%
+
+Xnnn - Exercise Answers
