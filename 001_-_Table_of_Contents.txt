@@ -42,9 +42,10 @@ A note on this Table of Contents:
 	202 - Scripting with bash (and other shells) - 0%
 	[[212 - Python Installation and Basics]] - 25%
 	213 - Variables in Python - 0%
-	214 - Functions in Python - 0%
-	215 - Packages in Python - 0%
-	216 - Object Oriented Python - 0%
+	214 - Control Flow in Python - 0%
+	215 - Functions in Python - 0%
+	216 - Packages in Python - 0%
+	217 - Object Oriented Python - 0%
 	219 - Python on the command line (python, pip, and why not to use python2.7) - 0%
 	221 - Lua Installation and Basics - 0%
 	222 - Lua vs. Python - 0%
