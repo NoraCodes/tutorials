@@ -161,4 +161,4 @@ or my personal PS1:
 	
 To bring your shell back to normal, simply close and reopen it.
 	
-These tricks will allow you to use the bash shell to its fullest. In the next tutorial, we'll being looking at one of the most useful things to do from the command line: network setup and troubleshooting.
+These tricks will allow you to use the bash shell to its fullest. In the next tutorial, we'll being looking at some of the most useful things to do from the command line: [[106 - Networking from the Command Line|network setup and troubleshooting]].

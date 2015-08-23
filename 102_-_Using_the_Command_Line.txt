@@ -14,7 +14,7 @@ You will be presented with something like:
 
 	user@machine:~$
 	
-This is the prompt. It is literally the machine prompting you for input - telling you that it's your turn to talk. In addition, it contains a lot of information, so let's dissect it. In the example, user is the name of the user and machine is the name of the computer - the @ symbol signifies this, as in "user at machine". For my personal machine, this prompt looks like:
+This is the prompt. It is literally the machine prompting you for input - telling you that it's your turn to talk. In addition, it contains a lot of information, so let's dissect it. In the example, user is the name of the user and machine is the name of the computer - the @ symbol signifies this, as in "user at machine". For my personal laptop, this prompt looks like:
 
 	sws@shadowfax:~$
 	
@@ -68,7 +68,7 @@ ls can give you more details about these files, too; try:
 
 	ls -l -h
 	
-In this command, l and h are "switches". "-l" tells ls to use a "long" listing format, while "-h" tells ls to use a "human-readable" format for the sizes (i.e., 20.3M rather than 20284435).
+In this command, l and h are "switches". "-l" tells ls to use a "long" listing format, while "-h" tells ls to use a "human-readable" format for the sizes (i.e., 20.3M rather than 20284435). This will spit out what looks like gibberish to you now. Revisit this command as you progress - you will understand more and more over time.
 
 Now, lets edit test.txt. Type:
 
@@ -162,4 +162,4 @@ and hit enter. Now, if we try:
 	
 it should work. 
 
-Now you understand the basics of the command line - manipulating files and directories. Next, I'll introduce you to permissions and the magical command sudo.
+Now you understand the basics of the command line - manipulating files and directories. Next, I'll introduce you to [[103 - Users and the Command Line|permissions and the magical command sudo]].

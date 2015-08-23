@@ -46,4 +46,4 @@ You can also change which users you are logged in as with the command su. For ex
 	
 will drop you to another command line at which you are logged in as otheruser.
 
-You can navigate the filesystem and change permissions, and your knowledge of the sudo command gives you the ability to administrate the system effectively. Now, go on to the next tutorial, in which you will learn how to get help on commands you don't know about, and learn the names and uses of some of the more common utility commands.
+You can navigate the filesystem and change permissions, and your knowledge of the sudo command gives you the ability to administrate the system effectively. Now, go on to the [[104 - More Advanced Command Line Use|next tutorial]], in which you will learn how to get help on commands you don't know about, and learn the names and uses of some of the more common utility commands.

@@ -22,4 +22,4 @@ This rule is one of the major reasons that the previous one works. If all tools 
 
 In UNIX-like systems, everything with which you can communicate is a file. Obviously, files are files - you can write data to them and read data from them, and it get written to and read from the disk. But many other things are also files. For example, the operating system provides a "file" called /dev/urandom which cannot be written to but, when read from, will spit out truly random bits. It does not "contain" these bits in the way a normal file on the disk does - every time you read from it, they are different - but for a programmer or command line user, there is no difference between /dev/urandom and, for example, this file, your cat photos, or your tax spreadsheet.
 
-Ok, the boring part is over. Move on to lesson 102 to learn how to use the command line to get some work done!
+Ok, the boring part is over. Move on to lesson [[102 - Using the Command Line|102]] to learn how to use the command line to get some work done!

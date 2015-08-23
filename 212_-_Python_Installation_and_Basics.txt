@@ -1,0 +1,40 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2015-08-14T14:50:30-07:00
+
+====== 212 - Python Installation and Basics ======
+
+Python is an incredibly versatile language. It offers more power than bash scripts, requires less preparation and deployment effort than C or C++, and has the advantages given by a huge, diverse community and a rich ecosystem of modules that can be installed easily.
+
+On Ubuntu, Python3 is usually already installed, but just to make sure, run
+
+	sudo apt install python3
+	
+Python3 is the modern Python, and it's what we'll be using. The traditional way to introduce new users to a language is to write a program which prints "Hello, world!" to the screen. Luckily, in Python, that's easy. Make a new file called hello.py somewhere (I'd recommend a new directory). It needs to contain the line:
+
+	print("Hello, world!")
+
+Save it, navigate to that directory in the terminal, and type
+
+	python3 hello.py
+	
+and Python will print Hello, world! You've successfully run a Python program. The python3 command invokes the interpreter, and giving it the file name of a Python program tells it to run that program.
+
+You can also use Python interactively. Type:
+
+	python3
+	
+and you will see a prompt
+
+>>>
+
+This means that Python is ready for you to enter commands. The Python interpreter works much like bash; try typing print("Hello interactive!") and you will see that it gets printed. Python, in interactive mode (i.e., when you are not running a script that is in a file)  will also print the evaluation of the expression that is entered, even if you don't print() it. This is useful for debugging. Try:
+
+	1 + 1
+	
+and Python should print "2".  What has happened here is what happens in every line of every program, and it is at the core of Python - and, indeed, of any scripting language. The interface you are interacting with is a REPL, a Read-Evaluate-Print Loop, and it is how Python executes all of its code. The interpreter loads the string you have sent it, whether from the interactive interpreter or from a file. So, the statement "1 + 1" was Read by the interpreter, Evaluated (1 + 1 = 2, so the expression evaluated to 2), and the results were Printed. We can do more complex things, too. For example:
+
+	"Hello, " + "World!"
+	
+Will do what you might expect. The interpreter is not perfect though; or rthar, it 
+

@@ -4,7 +4,7 @@ Creation-Date: 2015-08-14T13:19:31-07:00
 
 ====== 104 - More Advanced Command Line Use ======
 
-By now, it should be clear to you that there a very large number of commands are available on the command line. While I will do my best to teach you the basics, it would be both impossisble and impractical for me to teach you all of them. Therefore, on the "teach someone to fish" theory, I will instruct you in the use of man, the Linux manual viewer. man is very simple to use. Try, for example,
+By now, it should be clear to you that there a very large number of commands are available on the command line. While I will do my best to teach you the basics, it would be impractical for me to teach you all of them. Therefore, on the "teach someone to fish" theory, I will instruct you in the use of man, the Linux manual viewer. man is very simple to use. Try, for example,
 
 	man intro
 	
@@ -56,7 +56,11 @@ Your system holds a list of which packages are available, which you've chosen to
 
 	sudo apt update
 	
-apt will spit out a list of repositories it has "hit" (gotten information from). Now, your system package list is up to date; let's install something. We'll install SciTE, a small but very useful text editor. Type:
+sudo is needed for many commands that interface with APT - this is an intentional security measure, as APT can change important system files. apt will spit out a list of repositories it has "hit" (gotten information from). Now, your system package list is up to date; let's install something. Now, assuming we don't know the name of our software, we'll need to search for it. APT has an interface for this as well in apt:
+
+	apt search "programming editor"
+	
+No sudo here - we're just reading from the list of packages, which doesn't present any risk. Two packages matched the search for me, but you might see more. We'll install SciTE, a small but very useful text editor. Type:
 
 	sudo apt install scite
 	
@@ -68,10 +72,10 @@ apt will delete all of SciTE's files, erasing it from your system and freeing up
 
 	sudo apt upgrade
 
-Depending on how up to date your system is, this might run for a while. Once it's done, your system will be up to date.
+Depending on how out of date your system is, this might run for a while. Once it's done, your system will be up to date. It is recommended to apt update and apt upgrade frequently - I do it every week, unless an important security update is available, in which case I do it as soon as possible. This is one of the only scenarios in which I suggest novices use a GUI - see the note below.
 
-NOTE: Some tutorials use apt-get instead of apt. This is fine, but apt-get is intentionally outdated, since it is designed to be compatible with very old software. apt is much more user-friendly.
+NOTE: Some tutorials use apt-get instead of apt. This is fine, and makes no functional difference, but apt-get is intentionally outdated, since it is designed to be compatible with very old software. apt is much more user-friendly.
 
 NOTE: In graphical systems like Ubuntu Desktop, there is generally an Update Manager that will update your system from the GUI. It uses apt on the back-end, essentially running these same commands and showing you a pretty interface.
 
-Now, you can install and learn how to use software yourself. Let's move on to some more advanced topics, such as combining commands to unlock the true power of UNIX automation.
+Now, you can install and learn how to use software yourself. Let's move on to some [[105 - The bash Shell|more advanced topics]], such as combining commands to unlock the true power of UNIX automation.

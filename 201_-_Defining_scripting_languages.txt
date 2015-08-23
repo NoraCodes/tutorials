@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2015-08-14T13:20:34-07:00
-
-====== 201 - Defining scripting languages ======
-
-Python is an incredibly versatile language. It combines the best features of scripting and compiled languages, and has the advantages given by a huge, diverse community and a rich ecosystem of modules 
-
