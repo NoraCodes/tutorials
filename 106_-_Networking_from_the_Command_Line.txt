@@ -20,7 +20,9 @@ will cause ping to behave like the Windows ping and send only 5 packets, at 0.2 
 
 If you need to get the IP address of a host, or to figure out where in the DNS tree the address is being resolved, you can use nslookup. For example:
 
-[FINISH THIS]
+	nslookup google.com
+	
+will tell you, first, what server you got the DNS info from, and second, what record was retrieved. 
 
 Another useful, jack-of-all-trades network tool is NetCat, or nc. It is, as the name implies, essentially just cat over the network. To see how it works, open up 2 terminal windows. In one, enter:
 
