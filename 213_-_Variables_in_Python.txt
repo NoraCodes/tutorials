@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2015-08-23T12:50:58-07:00
+
+====== 213 - Variables in Python ======
+
+Variables are one of the most useful parts of any programming language. They allow you to store the results of an operation, and to operate on those results in turn. This is what turns imperative languages from simple lists of actions into complex mathematical operations that can solve real, useful problems. This example program demonstrates how to use them.
+
+	# This is a comment

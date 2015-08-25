@@ -31,7 +31,7 @@ A note on this Table of Contents:
 	107 - GNU/Linux File Organization - 0% 
 	[[108 - FIFOs and Advanced Piping]] - 100%
 	109 - The Art of .bashrc - 0%
-	110 - Compression and archiving with tar - 0%
+	[[110 - Compression and archiving with tar]] - 100%
 	111 - A note on backups  - 0%
 	115 - Filesystems (fstab, mount, and network)
 	120 - systemd for initialization and bootup
@@ -41,8 +41,8 @@ A note on this Table of Contents:
 	[[201 - Defining Scripting Languages]] - 100%
 	202 - Scripting with bash (and other shells) - 0%
 	[[212 - Python Installation and Basics]] - 25%
-	213 - Variables in Python - 0%
-	214 - Control Flow in Python - 0%
+	[[213 - Variables in Python]] - 0%
+	[[214 - Control Flow in Python]] - 0%
 	215 - Functions in Python - 0%
 	216 - Packages in Python - 0%
 	217 - Object Oriented Python - 0%

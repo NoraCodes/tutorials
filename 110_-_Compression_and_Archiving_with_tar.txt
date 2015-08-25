@@ -4,3 +4,47 @@ Creation-Date: 2015-08-14T13:20:24-07:00
 
 ====== 110 - Compression and Archiving with tar ======
 
+tar is a command, originally created for archiving and dearchiving data on tapes. The name stands for Tape ARchive. Currently, tar is used to create compressed archives - i.e., files that contain multiple files and are smaller than their original sizes. You may have seen with names like "file.tar.gz" or "file.tar.bz2". This naming convention is used as follows: file is the name of the file, .tar denotes that it is an archive made of multiple files, and .gz or .bz2 denotes the algorithm used to compress it (gZip or bZip2).
+
+Essentially, what tar does is take a list of files and wrap them up into one, along with all the necessary data to unwrap and restore them. Then, tar uses the algorithm of your choice to squish the archive down as much as possible. On things like text and some types of images and video, this is very easy; on most files, it is not. However, since what most people do with files is send them over bandwidth-restricted Internet links, even a small amount of compression is usually worth it, since it will reduce the upload and download times for the file.
+
+So, on to using tar. We first need a few files to compress; we'll use the output of syslog to create some. Use:
+	mkdir tar_test
+	tail /var/log/syslog > tar_test/file1.txt
+	cp tar_test/file1.txt tar_test/file2.txt
+	cp tar_test/file1.txt tar_test/file3.txt
+	
+These files are great candidates for compression, since they're all the same! So, let's do it. Type this in; I'll explain each option later.
+
+	tar cvf archive.tar tar_test/
+	
+This will create a new archive, uncompressed. In that command, "c" told tar to make a new archive; "v" told it to tell us about each file it processes; and "f" told it that the next argument (archive.tar) would be the name of the file it is meant to create. Then, finally, tar_test/ informs tar that we want it to archive the contents of the tar_test directory. Now, let's delete the directory:
+	
+	rm tar_test/*
+	rmdir tar_test
+	
+and restore it from our archive:
+	
+	tar xvf archive.tar
+	
+Again, "v" means verbose and "f" means that the filename follows. Here, though, we use "x", which means "extract". If you do a quick ls, you'll see that tar has restored the files. Now, let's do it with compression. Type:
+
+	tar cvzf gzipped.tar.gz tar_test/
+	
+Here, "z" tells tar to send the archive to the gzip compression algorithm. Now, use:
+
+	tar cvjf bzip2ed.tar.bz2 tar_test/
+	
+These can each be unzipped and restored with the corresponding command with an "x":
+
+	tar xvzf gzipped.tar.gz
+	tar xvjf bzip2ed.tar.bz2
+
+Now, let's compare the sizes. Type:
+
+	ls -lh *.tar*
+	
+and look at the 5th column. As an example, mine were 20K for the archive, 1.1K for the BZip2 file, and only 805 bytes for the GZip file. As you can see, both the BZip2 and GZip algorithms decrease the size of files massively. To be fair, in this case, all three files were the same; but in the case of both algorithms, the compressed file was about 1/20th of the size of the archive, not just 1/3rd.
+
+tar has many more options, and I advise that you read the manual page for it; these commands, however, will give you enough functionality to unzip files you download and zip up files and directories for others to use.
+

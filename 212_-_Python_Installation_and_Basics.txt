@@ -48,7 +48,7 @@ Python has variables, somewhat like those used in bash. For example:
 	>>> print("Hello, " + name + "!")
 	Hello, Silver!
 	
-As you can see, it is legal to do math on variables as if they were the literal values they represent.
+As you can see, it is legal to do math on variables as if they were the literal values they represent. For more on variables, see [[213 - Variables in Python]].
 
 Python also has the ability to make decisions. It does this by using if/else statements, of the form:
 	
@@ -72,5 +72,9 @@ Here, the "==" symbol means "check if the things on the left and the right have 
 		print("Still in the conditional.")
 	print("Not in the conditional.")
 	
-Will print only "Not in the conditional." because the other two statements are indented into the conditional.
+Will print only "Not in the conditional." because the other two statements are indented into the conditional. For more on conditionals and other ways to effect the program flow, see [[214 - Control Flow in Python]].
+
+Python supports functions as well. These are pieces of code that 
+
+Any time you write a program in Python (or any other language), it is vital to add comments. This is because, as the inventor of Python said, "code is read much more often than it is written". Even though Python is one of the most readable languages in the world, adding comments can massively help those who are reading your code.
 
