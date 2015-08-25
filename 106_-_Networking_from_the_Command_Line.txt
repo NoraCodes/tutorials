@@ -59,7 +59,29 @@ Another useful trick exists when using bash (usually the default shell). You can
 	
 and bash will open a TCP session to example.com:80 and send the request. However, /dev/tcp/hostname/port is not a real file, or a real kernel device; it is simply a convenient shorthand that bash allows us to use when redirecting input.
 
-[WRITE ABOUT NMAP - JUST BASIC SCANNING]
+If you need to know what ports are open on a specific server, nmap is an amazingly useful tool. Install it with:
+
+	sudo apt install nmap
+	
+and try it out with:
+
+	nmap google.com
+	
+Running an nmap scan will take a while. That's OK! It's doing a lot of work in the background. We can see its results when it's finally done. They'll look something like this:
+
+	Starting Nmap 6.47 ( http://nmap.org ) at 2015-08-25 15:41 PDT
+	Nmap scan report for google.com (74.125.224.39)
+	Host is up (0.018s latency).
+	Other addresses for google.com (not scanned): 74.125.224.35 74.125.224.34 74.125.224.46 74.125.224.36 74.125.224.40 74.125.224.38 74.125.224.41 74.125.224.32 74.125.224.37 74.125.224.33
+	rDNS record for 74.125.224.39: lax17s01-in-f7.1e100.net
+	Not shown: 998 filtered ports
+	**PORT    STATE SERVICE**
+	**80/tcp  open  http**
+	**443/tcp open  https**
+
+That last part (which I bolded) is the important bit. nmap is telling us that the host at google.com is allowing connections to ports 80 and 443, as well as telling us what it thinks those ports are for.
+
+nmap is vastly complex and extremely powerful; I suggest that, if you want to use nmap for scanning, network mapping, or any of the other things it's great for, check out nmap.org and check out the nmap manual page.
 
 For lower-level settings, the ip comand is extremely useful. ip is a suite of tools to examine the state, configuration, and capabilities of network interfaces. For example,
 
