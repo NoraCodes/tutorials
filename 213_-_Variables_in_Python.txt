@@ -4,6 +4,48 @@ Creation-Date: 2015-08-23T12:50:58-07:00
 
 ====== 213 - Variables in Python ======
 
-Variables are one of the most useful parts of any programming language. They allow you to store the results of an operation, and to operate on those results in turn. This is what turns imperative languages from simple lists of actions into complex mathematical operations that can solve real, useful problems. This example program demonstrates how to use them.
+Variables are one of the most useful parts of any programming language. They allow you to store the results of an operation, and to operate on those results in turn. This is what turns imperative languages from simple lists of actions into complex mathematical operations that can solve real, useful problems.
 
-	# This is a comment
+In Python, we can say
+
+	>>> variable = 8
+	
+That's assignment. We assigned the variable "variable" a value of 8. If we print the variable, we'll get 8. If we say
+
+	>>> variable + 1
+	
+the result will be 9. We can also multiply, subtract, and divide the variable; it acts just like its value. But, is a variable; it can vary, or change, its value. So
+
+	>>> variable = 8
+	>>> print(variable)
+	8
+	>>> variable = 9
+	>>> print(variable)
+	9
+	
+This is called reassignment; we're assigning it again. We can also use variables in their own reassignments. So,
+
+	>>> variable = 8
+	>>> variable = variable + 1
+	>>> print(variable)
+	9
+
+We can even do more complex things with self-assignment. 
+
+	>>> variable = 8
+	>>> variable = variable * variable
+	>>> print(variable)
+	64
+	
+You can think of the operation like this. You enter
+
+	>> variable = 8
+	>> variable = variable * variable
+	
+The interpreter looks up the value of variable and replaces them, so it sees that expression as:
+
+	variable = 8 * 8
+
+which is, of course, 64.
+
+
