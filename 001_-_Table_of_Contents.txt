@@ -23,7 +23,7 @@ A note on this Table of Contents:
 100: GNU/Linux Tutorial
 	[[101 - Fundamental UNIX concepts]] - 100%
 	[[102 - Using the Command Line]] (File creation and management) - 100%
-	[[103 - Users and the Command Line]] (Permissions and sudo) - 90%
+	[[103 - Users and the Command Line]] (Permissions and sudo) - 100%
 	[[104 - More Advanced Command Line Use]] (Getting assistance and 
 		examining the machine state) - 100% 
 	[[105 - The bash Shell]] (Pipes, redirects, and variables) - 100%

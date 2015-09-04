@@ -18,7 +18,9 @@ changes everyone's permissions (a) by removing (-) the write permission (w). You
 
 Exercise 1: Figure out the chmod command that would be used to recursively set both read and write permissions for all users in the group that owns a directory calledd directory.
 
-It's also possible to change the group that owns the file. Every user belongs to at least one group, usually with the same name as that user, and can belong to an indefinite number of groups. [TODO: Add how to view the user's group assignments.] For example:
+It's also possible to change the group that owns the file. Every user belongs to at least one group, usually with the same name as that user, and can belong to an indefinite number of groups. 
+
+For example:
 
 	chgrp group file.txt
 	
@@ -47,3 +49,35 @@ You can also change which users you are logged in as with the command su. For ex
 will drop you to another command line at which you are logged in as otheruser.
 
 You can navigate the filesystem and change permissions, and your knowledge of the sudo command gives you the ability to administrate the system effectively. Now, go on to the [[104 - More Advanced Command Line Use|next tutorial]], in which you will learn how to get help on commands you don't know about, and learn the names and uses of some of the more common utility commands.
+
+Groups are used for many different things. If you're curious as to what groups you're in, try:
+
+	group
+	
+I, for example, get:
+
+	sws adm dialout cdrom sudo dip plugdev lpadmin sambashare vboxusers
+
+These groups assignments are, from first to last, my user group (sws), the Ubuntu system monitor group (adm), groups that give me permissions for some hardware devices (dialout, cdrom, plugdev, lpadmin), the sudoers group for Ubuntu (sudo), a group that allows me to mount SMB shares via Samba (sambashare), and a group that allows me to use the advanced features of VirtualBox. 
+
+You can also check the groups of other users, with:
+
+	group username
+
+Also, if you need numerical IDs for the groups, you can use:
+
+	id username
+	
+You can list every group on the system, or see what users are in which group, with:
+
+	getent group 
+	
+and
+
+	getent group groupname
+	
+for example:
+
+	$ getent group sambashare
+	sambashare:x:124:sws
+
