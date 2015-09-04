@@ -37,23 +37,4 @@ A note on this Table of Contents:
 	120 - systemd for initialization and bootup
 	185 - Nix, NixOS, and declarative operations - 0%
 
-200: Scripting Languages
-	[[201 - Defining Scripting Languages]] - 100%
-	202 - Scripting with bash (and other shells) - 0%
-	[[212 - Python Installation and Basics]] - 25%
-	[[213 - Variables in Python]] - 0%
-	[[214 - Control Flow in Python]] - 0%
-	215 - Functions in Python - 0%
-	216 - Packages in Python - 0%
-	217 - Object Oriented Python - 0%
-	219 - Python on the command line (python, pip, and why not to use python2.7) - 0%
-	221 - Lua Installation and Basics - 0%
-	222 - Lua vs. Python - 0%
-	223 - Regular Expressions (and writing something useful) - 0%
-
-300: Compiled Languages
-	301 - Defining compiled languages - 0%
-	302 - ANSI C - 0%
-	303 - Using gcc, ld, and make - 0%
-
 Xnnn - Exercise Answers
