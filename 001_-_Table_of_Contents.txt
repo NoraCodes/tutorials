@@ -30,7 +30,7 @@ A note on this Table of Contents:
 	[[106 - Networking from the Command Line]] - 75%
 	107 - GNU/Linux File Organization - 0% 
 	[[108 - FIFOs and Advanced Piping]] - 100%
-	109 - The Art of .bashrc - 0%
+	[[109 - The Art of .bashrc]] - 50%
 	[[110 - Compression and archiving with tar]] - 100%
 	111 - A note on backups  - 0%
 	115 - Filesystems (fstab, mount, and network)

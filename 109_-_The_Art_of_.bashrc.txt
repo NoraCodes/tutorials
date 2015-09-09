@@ -1,0 +1,44 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2015-09-08T15:50:34-07:00
+
+====== 109 - The Art of .bashrc ======
+.bashrc (~/.bashrc) is a file that is run by the bash shell every time it starts up. This allows you to make persistent configuration changes and customize your bash to so you feel as comfortable as possible in it. Several commands are very useful in this file. The first and most widely used is alias:
+
+	alias ll='ls -l'
+	
+Putting this in your .bashrc will tell bash to replace ll with ls -l when you type it as a command. The string you type shouldn't have any quotes, while the replacement should be surrounded by them. There can't be a space between either term and the equals sign, but there can be spaces inside the quotes. This alias here, by the way, is one of the most useful and common ones that many distros automatically include.
+
+If you look in your .bashrc, you'll see a large amount of code already there. This is because Ubuntu includes a lot of helpful settings by default - adding color support to ls with an alias, ensuring that bash does interactive-specific things only when you're really in interactive mode, et cetera.
+
+NOTE: Ubuntu actually provides another file for bash aliases, ~/.bash_aliases However, putting them in .bashrc works just as well - this is just an organizational tool.
+
+You can also define variables in .bashrc. As a gamer, one of the most useful of these it PULSEAUDIO_LATENCY_MSEC; setting this to a relatively long value will fix audio for some games, so I have it set in my .bashrc. The line to set it looks like this:
+
+	export PULSEAUDIO_LATENCY_MSEC=60
+
+The export command tells bash that this variable should keep existing after the script (.bashrc) is done executing. Some variables control the operation of bash itself; the most important of these is PS1. PS1 is the prompt that bash shows you, as discussed in [[105 - The bash Shell]]. This is usually set in .bashrc. For example:
+
+	export PS1="Command me, master: "
+
+or my personal PS1, which packs in information about the current time, the current user, and the current directory:
+
+	export PS1="\n\t: \[$(tput sgr0)\]\[\033[38;5;2m\]\u\[$(tput sgr0)\]\[\033[38;5;15m\] [\w]\n\\$ \[$(tput sgr0)\]"
+
+This creates a prompt that looks like:
+
+	16:45:10: sws [~]
+	$ 
+
+(The command is entered after the $ here.) You can generate these (admittedly somewhat arcane) strings using tools, such as http://bashrcgenerator.com/ 
+
+Another useful variable is EDITOR, which allows you to set the default editor (for example, you might set it to vim or nano, without quotes).
+
+NOTE: Some people prefer the syntax:
+	
+	VARIABLE="Value"
+	export VARIABLE
+
+but I find this unnecessarily verbose; the one-line export syntax is fine in most cases.
+
+
