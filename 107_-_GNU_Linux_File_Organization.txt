@@ -1,0 +1,30 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2015-09-04T08:25:56-07:00
+
+====== 107 - GNU Linux File Organization ======
+
+The Linux filesystem is organized in a very specific manner. Unlike NT filesystems which are multi-rooted (i.e. C:\ and F:\ are totally different file systems), the Linux file system starts at  the / directory, called the root, and all storage devices are mounted as directories. This is the most sensible way to organize things, since on Linux, everything is a file, as mentioned before.
+
+Under the / directory, there are several directories, each with a specific purpouse.
+
+**/ **is the root directory, and every file is under [[/.]] Thus to search the whole filesystem, you can point a command like "find" at the / directory.
+	**/bin** is a directory full of symlinks to programs. It is not supposed to have any subdirectories, and generally gets modified only by system upgrades; it provides access to such critical programs as the bash shell, and vital commands like ls, cat, mount, etc.
+	**/sbin **is similar to [[/bin]] but holds programs meant to be used by superusers (the root account)
+	**/usr/bin** and **/usr/local/bin **like [[/bin,]] a directory full of symlinks to programs - in this case, user-installed apps.
+	**/usr/sbin** like [[/sbin,]] a directory full of symlinks to system administration programs installed by the user.
+	**/usr/share** is "architecture independent data", which, as opposed to the binaries held in bin and sbin directories, will work on any computer. This includes things like [[/usr/share/dict]] which holds lists of words for spell check.
+	**/boot** holds files needed to start the computer. Try not to mess with this, as you may end up with an unbootable system!
+	**/dev** is full of special files which refer to physical devices (such as [[/dev/sda,]] [[/dev/sdb1,]] etc for drives, and [[/dev/js0]] for joysticks) and pseudodevices like [[/dev/urandom]] which produces an infinite stream of randomness and [[/dev/zero]] which produces an infinite stream of 0s.
+	**/proc**, like [[/dev,]] holds special files that rather than actually being stored on disk are representations of the current state of the machine.
+	**/etc** holds configuration files that are specific to this computer.
+	**/home** holds files created by and belonging to users. For example, since my username is sws, I have the directory [[/home/sws/]] On many distributions, this is auto-populated with directories like Documents, Downloads, Music, Pictures, Desktop, etc. When setting up partitioning, this should generally be the largest of the partitions as it is responsible for users' video files and such.
+	**/lib **holds system libraries to which programs can link for various functionality.
+	**/usr/lib **holds non-core libraries such as libOpenGL, libOpenCL, libOpenCV,  libMono, and other user-installed libraries (generally automatically installed by the package manager as required).
+	**/var **holds variable system files - files that change a lot, like logs (most notably [[/var/log/syslog]]), the system mail spool, info about running processes (/var/run), info about which program has "dibs" on which resources (/var/lock), 
+	**/mount** holds directories for mounting additional media. For example, in my computer, I have a "bulk" storage RAID array which is mounted on [[/media/bulk]]
+	**/srv** is a non-standard directory for content to be served over the network, such as web sites.
+
+
+	
+	
