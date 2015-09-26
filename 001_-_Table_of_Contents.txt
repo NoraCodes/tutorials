@@ -28,7 +28,7 @@ A note on this Table of Contents:
 		examining the machine state) - 100% 
 	[[105 - The bash Shell]] (Pipes, redirects, and variables) - 100%
 	[[106 - Networking from the Command Line]] - 75%
-	107 - GNU/Linux File Organization - 0% 
+	[[107 - GNU Linux File Organization|107 - GNU/Linux File Organization]] - 0% 
 	[[108 - FIFOs and Advanced Piping]] - 100%
 	[[109 - The Art of .bashrc]] - 50%
 	[[110 - Compression and archiving with tar]] - 100%
